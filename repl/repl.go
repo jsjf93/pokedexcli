@@ -1,6 +1,8 @@
 package repl
 
-import "strings"
+import (
+	"strings"
+)
 
 func CleanInut(text string) []string {
 	return strings.Fields(strings.ToLower(text))
