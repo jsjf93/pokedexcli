@@ -13,8 +13,8 @@ type cliCommand struct {
 
 type Registry = map[string]cliCommand
 
-func NewRegistry() map[string]cliCommand {
-	registry := map[string]cliCommand{
+func NewRegistry() Registry {
+	registry := Registry{
 		"exit": {
 			Name:        "exit",
 			Description: "Exit the Pokedex",
