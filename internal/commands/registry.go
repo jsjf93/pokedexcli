@@ -1,10 +1,5 @@
 package commands
 
-import (
-	"fmt"
-	"os"
-)
-
 type cliCommand struct {
 	Name        string
 	Description string
@@ -18,31 +13,14 @@ func NewRegistry() Registry {
 		"exit": {
 			Name:        "exit",
 			Description: "Exit the Pokedex",
-			Callback:    commandExit,
+			Callback:    CommandExit,
 		},
 		"help": {
 			Name:        "help",
 			Description: "Displays a help message",
-			Callback:    commandHelp,
+			Callback:    CommandHelp,
 		},
 	}
 
 	return registry
-}
-
-func commandExit() error {
-	fmt.Println("Closing the Pokedex... Goodbye!")
-	os.Exit(0)
-	return nil
-}
-
-func commandHelp() error {
-	fmt.Println("Welcome to the Pokedex!")
-	fmt.Printf("Usage: \n\n")
-
-	for _, command := range NewRegistry() {
-		fmt.Printf("%s: %s\n", command.Name, command.Description)
-	}
-
-	return nil
 }
