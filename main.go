@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/jsjf93/pokedexcli/commands"
-	"github.com/jsjf93/pokedexcli/repl"
+	"github.com/jsjf93/pokedexcli/internal/commands"
+	"github.com/jsjf93/pokedexcli/internal/repl"
 )
 
 func main() {
