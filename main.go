@@ -10,13 +10,14 @@ import (
 )
 
 func main() {
-	commands := commands.NewRegistry()
+	commandRegistry := commands.NewRegistry()
+	config := commands.NewConfig()
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for {
 		fmt.Print("Pokedex > ")
 		scanner.Scan()
-		words := repl.CleanInut(scanner.Text())
+		words := repl.CleanInput(scanner.Text())
 
 		if len(words) == 0 {
 			fmt.Println("Input is required")
@@ -25,12 +26,12 @@ func main() {
 
 		commandKey := words[0]
 
-		command, found := commands[commandKey]
+		command, found := commandRegistry[commandKey]
 
 		if !found {
 			fmt.Println("Unknown command")
 		} else {
-			command.Callback()
+			command.Callback(&config)
 		}
 	}
 }
