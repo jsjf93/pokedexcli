@@ -26,7 +26,7 @@ func TestCleanInput(t *testing.T) {
 	}
 
 	for _, tc := range tests {
-		actual := CleanInut(tc.input)
+		actual := CleanInput(tc.input)
 
 		if len(actual) != len(tc.expected) {
 			t.Errorf("Actual length: %d is not equal to expected length: %d", len(actual), len(tc.expected))
