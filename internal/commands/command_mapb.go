@@ -8,11 +8,10 @@ import (
 	"github.com/jsjf93/pokedexcli/internal/commands/apiresponses"
 )
 
-func CommandMap(config *Config) error {
-	url := config.Next
+func CommandMapb(config *Config) error {
+	url := config.Previous
 
 	res, err := http.Get(url)
-
 	if err != nil {
 		return fmt.Errorf("error retrieving location areas: %w", err)
 	}
@@ -20,8 +19,8 @@ func CommandMap(config *Config) error {
 	defer res.Body.Close()
 
 	var locationAreaResponse apiresponses.LocationAreaResponse
-	decoder := json.NewDecoder(res.Body)
 
+	decoder := json.NewDecoder(res.Body)
 	if err := decoder.Decode(&locationAreaResponse); err != nil {
 		return fmt.Errorf("error decoding response: %w", err)
 	}

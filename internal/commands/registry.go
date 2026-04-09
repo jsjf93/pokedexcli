@@ -25,6 +25,11 @@ func NewRegistry() Registry {
 			Description: "Retrieves the next 20 location areas in the Pokemon world",
 			Callback:    CommandMap,
 		},
+		"mapb": {
+			Name:        "mapb",
+			Description: "Retrieves the previous 20 location areas in the Pokemon world",
+			Callback:    CommandMapb,
+		},
 	}
 
 	return registry

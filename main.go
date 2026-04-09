@@ -31,7 +31,10 @@ func main() {
 		if !found {
 			fmt.Println("Unknown command")
 		} else {
-			command.Callback(&config)
+			err := command.Callback(&config)
+			if err != nil {
+				fmt.Println(err)
+			}
 		}
 	}
 }
