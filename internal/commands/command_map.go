@@ -6,8 +6,8 @@ import (
 	"net/http"
 )
 
-func CommandMap() error {
-	url := "https://pokeapi.co/api/v2/location-area"
+func CommandMap(config *Config) error {
+	url := config.Next
 
 	res, err := http.Get(url)
 
@@ -27,6 +27,9 @@ func CommandMap() error {
 	for _, locationArea := range locationAreaResponse.Results {
 		fmt.Println(locationArea.Name)
 	}
+
+	config.Next = locationAreaResponse.Next
+	config.Previous = locationAreaResponse.Previous
 
 	return nil
 }
