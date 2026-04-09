@@ -20,6 +20,11 @@ func NewRegistry() Registry {
 			Description: "Displays a help message",
 			Callback:    CommandHelp,
 		},
+		"map": {
+			Name:        "map",
+			Description: "Retrieves the next 20 location areas in the Pokemon world",
+			Callback:    CommandMap,
+		},
 	}
 
 	return registry
