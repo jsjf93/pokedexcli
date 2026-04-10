@@ -68,8 +68,7 @@ func getLocationArea(
 		fmt.Println(locationArea.Name)
 	}
 
-	config.Next = locationAreaResponse.Next
-	config.Previous = locationAreaResponse.Previous
+	config.UpdateUrls(locationAreaResponse.Next, locationAreaResponse.Previous)
 
 	return nil
 }
