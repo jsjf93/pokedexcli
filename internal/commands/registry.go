@@ -1,9 +1,13 @@
 package commands
 
+import (
+	"github.com/jsjf93/pokedexcli/internal/pokecache"
+)
+
 type cliCommand struct {
 	Name        string
 	Description string
-	Callback    func(config *Config) error
+	Callback    func(config *Config, cache pokecache.SafeCache) error
 }
 
 type Registry = map[string]cliCommand

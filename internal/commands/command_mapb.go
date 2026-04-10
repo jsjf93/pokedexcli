@@ -6,9 +6,10 @@ import (
 	"net/http"
 
 	"github.com/jsjf93/pokedexcli/internal/commands/apiresponses"
+	"github.com/jsjf93/pokedexcli/internal/pokecache"
 )
 
-func CommandMapb(config *Config) error {
+func CommandMapbOld(config *Config, _ pokecache.SafeCache) error {
 	url := config.Previous
 
 	res, err := http.Get(url)
