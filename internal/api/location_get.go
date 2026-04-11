@@ -8,10 +8,8 @@ import (
 	"github.com/jsjf93/pokedexcli/internal/commands/apiresponses"
 )
 
-const baseUrl string = "https://pokeapi.co/api/v2/location-area/"
-
 func (c *Client) GetLocation(locationArea string) (apiresponses.LocationAreaResponse, error) {
-	url := baseUrl + locationArea
+	url := baseUrl + "location-area/" + locationArea
 	var response apiresponses.LocationAreaResponse
 
 	if cacheEntry, ok := c.Cache.Get(url); ok {

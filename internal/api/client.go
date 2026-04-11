@@ -7,6 +7,8 @@ import (
 	"github.com/jsjf93/pokedexcli/internal/pokecache"
 )
 
+const baseUrl string = "https://pokeapi.co/api/v2/"
+
 type Client struct {
 	HttpClient http.Client
 	Cache      pokecache.SafeCache
