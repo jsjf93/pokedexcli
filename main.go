@@ -6,17 +6,17 @@ import (
 	"os"
 	"time"
 
+	"github.com/jsjf93/pokedexcli/internal/api"
 	"github.com/jsjf93/pokedexcli/internal/commands"
-	"github.com/jsjf93/pokedexcli/internal/pokecache"
 	"github.com/jsjf93/pokedexcli/internal/repl"
 )
 
 func main() {
 	commandRegistry := commands.NewRegistry()
-	config := commands.NewConfig()
+	interval := time.Duration(60 * time.Second)
+	client := api.NewClient(interval)
+	config := commands.NewConfig(client)
 	scanner := bufio.NewScanner(os.Stdin)
-	interval := time.Duration(5 * time.Second)
-	cache := pokecache.NewCache(interval)
 
 	for {
 		fmt.Print("Pokedex > ")
@@ -35,7 +35,7 @@ func main() {
 		if !found {
 			fmt.Println("Unknown command")
 		} else {
-			err := command.Callback(&config, cache)
+			err := command.Callback(&config)
 			if err != nil {
 				fmt.Println(err)
 			}

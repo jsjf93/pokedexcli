@@ -1,17 +1,11 @@
 package commands
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
-
-	"github.com/jsjf93/pokedexcli/internal/commands/apiresponses"
-	"github.com/jsjf93/pokedexcli/internal/pokecache"
 )
 
-func CommandMap(config *Config, cache pokecache.SafeCache) error {
-	err := getLocationArea(config, &cache, config.Next)
+func CommandMap(config *Config) error {
+	err := getLocationArea(config, config.Next)
 	if err != nil {
 		return err
 	}
@@ -19,8 +13,8 @@ func CommandMap(config *Config, cache pokecache.SafeCache) error {
 	return nil
 }
 
-func CommandMapb(config *Config, cache pokecache.SafeCache) error {
-	err := getLocationArea(config, &cache, config.Previous)
+func CommandMapb(config *Config) error {
+	err := getLocationArea(config, config.Previous)
 	if err != nil {
 		return err
 	}
@@ -30,45 +24,18 @@ func CommandMapb(config *Config, cache pokecache.SafeCache) error {
 
 func getLocationArea(
 	config *Config,
-	cache *pokecache.SafeCache,
 	url string,
 ) error {
-	var locationAreaResponse apiresponses.LocationAreaResponse
-
-	if cacheResult, ok := cache.Get(url); ok {
-		json.Unmarshal(cacheResult, &locationAreaResponse)
-	} else {
-		res, err := http.Get(url)
-
-		if res.StatusCode > 200 {
-			return fmt.Errorf("network request failed with status code: %d", res.StatusCode)
-		}
-
-		if err != nil {
-			return fmt.Errorf("error retrieving location areas: %w", err)
-		}
-
-		defer res.Body.Close()
-
-		body, err := io.ReadAll(res.Body)
-		if err != nil {
-			return fmt.Errorf("error reading response: %w", err)
-		}
-
-		if err := json.Unmarshal(body, &locationAreaResponse); err != nil {
-			return fmt.Errorf("error decoding response: %w", err)
-		}
-
-		if err := cache.Add(url, body); err != nil {
-			return fmt.Errorf("error caching response: %w", err)
-		}
+	res, err := config.Client.ListLocationAreas(url)
+	if err != nil {
+		return err
 	}
 
-	for _, locationArea := range locationAreaResponse.Results {
+	for _, locationArea := range res.Results {
 		fmt.Println(locationArea.Name)
 	}
 
-	config.UpdateUrls(locationAreaResponse.Next, locationAreaResponse.Previous)
+	config.UpdateUrls(res.Next, res.Previous)
 
 	return nil
 }

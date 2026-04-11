@@ -1,16 +1,22 @@
 package commands
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/jsjf93/pokedexcli/internal/api"
+)
 
 const BaseUrl string = "https://pokeapi.co/api/v2/location-area"
 
 type Config struct {
+	Client   api.Client
 	Next     string
 	Previous string
 }
 
-func NewConfig() Config {
+func NewConfig(client api.Client) Config {
 	return Config{
+		Client:   client,
 		Next:     BaseUrl,
 		Previous: BaseUrl,
 	}
