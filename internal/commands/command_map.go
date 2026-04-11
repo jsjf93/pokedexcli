@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func CommandMap(config *Config) error {
+func CommandMap(config *Config, _ string) error {
 	err := getLocationArea(config, config.Next)
 	if err != nil {
 		return err
@@ -13,7 +13,7 @@ func CommandMap(config *Config) error {
 	return nil
 }
 
-func CommandMapb(config *Config) error {
+func CommandMapb(config *Config, _ string) error {
 	err := getLocationArea(config, config.Previous)
 	if err != nil {
 		return err

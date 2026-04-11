@@ -3,7 +3,7 @@ package commands
 type cliCommand struct {
 	Name        string
 	Description string
-	Callback    func(config *Config) error
+	Callback    func(config *Config, arg string) error
 }
 
 type Registry = map[string]cliCommand
@@ -29,6 +29,11 @@ func NewRegistry() Registry {
 			Name:        "mapb",
 			Description: "Retrieves the previous 20 location areas in the Pokemon world",
 			Callback:    CommandMapb,
+		},
+		"explore": {
+			Name:        "explore",
+			Description: "Retrieves the Pokemon you can encounter in a given area. Example: explore canalave-city-area",
+			Callback:    CommandExplore,
 		},
 	}
 

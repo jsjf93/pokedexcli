@@ -29,13 +29,18 @@ func main() {
 		}
 
 		commandKey := words[0]
+		arg := ""
+
+		if len(words) > 1 {
+			arg = words[1]
+		}
 
 		command, found := commandRegistry[commandKey]
 
 		if !found {
 			fmt.Println("Unknown command")
 		} else {
-			err := command.Callback(&config)
+			err := command.Callback(&config, arg)
 			if err != nil {
 				fmt.Println(err)
 			}
