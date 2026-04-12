@@ -1,6 +1,7 @@
 # pokedexcli
 
-I'm trying to learn a bit of Go and went through this guided project from [BootDev](https://www.boot.dev)
+I'm trying to learn a bit of Go and went through this guided project from [BootDev](https://www.boot.dev).
+
 `pokedexcli` is a small Go command-line application that uses the [PokeAPI](https://pokeapi.co) to explore Pokemon world data, catch Pokemon, and keep a local in-memory Pokedex during a session.
 
 ## Features
