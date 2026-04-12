@@ -58,10 +58,7 @@ func (p *Pokedex) Add(key string, pokemon apiresponses.PokemonResponse) {
 	}
 }
 
-func (p *Pokedex) Get(key string) (*apiresponses.PokemonResponse, bool) {
-	if pokemon, found := p.collection[key]; found {
-		return &pokemon, true
-	}
-
-	return nil, false
+func (p *Pokedex) Get(key string) (apiresponses.PokemonResponse, bool) {
+	pokemon, found := p.collection[key]
+	return pokemon, found
 }
