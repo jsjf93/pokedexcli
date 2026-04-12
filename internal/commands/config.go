@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"github.com/jsjf93/pokedexcli/internal/api"
+	"github.com/jsjf93/pokedexcli/internal/commands/apiresponses"
 )
 
 const BaseUrl string = "https://pokeapi.co/api/v2/location-area"
@@ -42,27 +43,23 @@ func (c *Config) UpdateUrls(next, previous string) {
 }
 
 type Pokedex struct {
-	Collection map[string]Pokemon
+	collection map[string]apiresponses.PokemonResponse
 }
 
 func NewPokedex() Pokedex {
 	return Pokedex{
-		Collection: make(map[string]Pokemon),
+		collection: make(map[string]apiresponses.PokemonResponse),
 	}
 }
 
-type Pokemon struct {
-	Name string
-}
-
-func (p *Pokedex) Add(key string, pokemon Pokemon) {
-	if _, found := p.Collection[key]; !found {
-		p.Collection[key] = pokemon
+func (p *Pokedex) Add(key string, pokemon apiresponses.PokemonResponse) {
+	if _, found := p.collection[key]; !found {
+		p.collection[key] = pokemon
 	}
 }
 
-func (p *Pokedex) Get(key string) (*Pokemon, bool) {
-	if pokemon, found := p.Collection[key]; !found {
+func (p *Pokedex) Get(key string) (*apiresponses.PokemonResponse, bool) {
+	if pokemon, found := p.collection[key]; found {
 		return &pokemon, true
 	}
 

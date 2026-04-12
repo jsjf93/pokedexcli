@@ -40,6 +40,11 @@ func NewRegistry() Registry {
 			Description: "Attempts to catch a Pokemon. Example: catch pikachu",
 			Callback:    CommandCatch,
 		},
+		"inspect": {
+			Name:        "inspect",
+			Description: "Retrieves details about a Pokemon you've caught. Example: inspect pikachu",
+			Callback:    CommandInspect,
+		},
 	}
 
 	return registry
