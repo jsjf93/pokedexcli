@@ -23,6 +23,7 @@ func CommandCatch(config *Config, pokemon string) error {
 
 	if isSuccess {
 		fmt.Printf("%s was caught!\n", res.Name)
+		config.Pokedex.Add(strings.ToLower(res.Name), Pokemon{Name: res.Name})
 	} else {
 		fmt.Printf("%s escaped!\n", res.Name)
 	}

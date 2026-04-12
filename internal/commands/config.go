@@ -12,6 +12,7 @@ type Config struct {
 	Client   api.Client
 	Next     string
 	Previous string
+	Pokedex  Pokedex
 }
 
 func NewConfig(client api.Client) Config {
@@ -19,6 +20,7 @@ func NewConfig(client api.Client) Config {
 		Client:   client,
 		Next:     BaseUrl,
 		Previous: BaseUrl,
+		Pokedex:  NewPokedex(),
 	}
 }
 
@@ -37,4 +39,32 @@ func (c *Config) UpdateUrls(next, previous string) {
 	} else {
 		c.Previous = previous
 	}
+}
+
+type Pokedex struct {
+	Collection map[string]Pokemon
+}
+
+func NewPokedex() Pokedex {
+	return Pokedex{
+		Collection: make(map[string]Pokemon),
+	}
+}
+
+type Pokemon struct {
+	Name string
+}
+
+func (p *Pokedex) Add(key string, pokemon Pokemon) {
+	if _, found := p.Collection[key]; !found {
+		p.Collection[key] = pokemon
+	}
+}
+
+func (p *Pokedex) Get(key string) (*Pokemon, bool) {
+	if pokemon, found := p.Collection[key]; !found {
+		return &pokemon, true
+	}
+
+	return nil, false
 }
