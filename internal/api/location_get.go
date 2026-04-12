@@ -21,12 +21,12 @@ func (c *Client) GetLocation(locationArea string) (apiresponses.LocationAreaResp
 
 	res, err := c.HttpClient.Get(url)
 
-	if res.StatusCode > 200 {
-		return apiresponses.LocationAreaResponse{}, fmt.Errorf("network request failed with status code: %d", res.StatusCode)
-	}
-
 	if err != nil {
 		return apiresponses.LocationAreaResponse{}, err
+	}
+
+	if res.StatusCode > 200 {
+		return apiresponses.LocationAreaResponse{}, fmt.Errorf("network request failed with status code: %d", res.StatusCode)
 	}
 
 	defer res.Body.Close()
