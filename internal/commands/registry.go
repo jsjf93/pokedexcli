@@ -35,6 +35,11 @@ func NewRegistry() Registry {
 			Description: "Retrieves the Pokemon you can encounter in a given area. Example: explore canalave-city-area",
 			Callback:    CommandExplore,
 		},
+		"catch": {
+			Name:        "catch",
+			Description: "Attempts to catch a Pokemon. Example: catch pikachu",
+			Callback:    CommandCatch,
+		},
 	}
 
 	return registry
